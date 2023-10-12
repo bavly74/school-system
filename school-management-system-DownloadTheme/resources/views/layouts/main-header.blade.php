@@ -25,10 +25,30 @@
                 </li>
             </ul>
             <!-- top bar right -->
+            
             <ul class="nav navbar-nav ml-auto">
+            <ul>
+            <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    {{trans('main_trans.Lang')}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+  @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+        <li>
+            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                {{ $properties['native'] }}
+            </a>
+        </li>
+    @endforeach 
+  </ul>
+</div>
+   
+</ul>
                 <li class="nav-item fullscreen">
+                    
                     <a id="btnFullscreen" href="#" class="nav-link"><i class="ti-fullscreen"></i></a>
                 </li>
+                
                 <li class="nav-item dropdown ">
                     <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                         aria-expanded="false">
@@ -53,6 +73,7 @@
                                 days</small> </a>
                     </div>
                 </li>
+                
                 <li class="nav-item dropdown ">
                     <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                         aria-expanded="true"> <i class=" ti-view-grid"></i> </a>

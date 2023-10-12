@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Grades\GradeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,29 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-    return view('dashboard');
+Route::group(['middleware'=>['guest']],function(){
+    Route::get('/', function () {
+        return view('auth.login');
+    });
 });
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','auth' ]
+    ], function(){
+        Route::group(['namespace'=>'Grades'],function(){
+            Route::get('/grades', [GradeController::class,'index'])->name('grades.index');
+            Route::post('/grades-store', [GradeController::class,'store'])->name('grades.store');
+            Route::post('/grades-update', [GradeController::class,'update'])->name('grades.update');
+            Route::post('/grades-destroy', [GradeController::class,'destroy'])->name('grades.destroy');
+
+        });
+    
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    });
+
+
+// Route::get('/home', 'HomeController@index')->name('home');
