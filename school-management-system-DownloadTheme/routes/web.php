@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Classroom\ClassroomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Grades\GradeController;
 
@@ -33,7 +34,12 @@ Route::group(
             Route::post('/grades-destroy', [GradeController::class,'destroy'])->name('grades.destroy');
 
         });
-    
+
+        Route::group(['namespace'=>'ClassRooms'],function(){
+            Route::get('/classrooms', [ClassroomController::class,'index'])->name('classrooms.index');
+
+        });
+
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
     });
 
