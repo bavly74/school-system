@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Grades;
 
+use App\Classroom;
 use App\Grade;
 use  App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGrades;
@@ -15,10 +16,10 @@ class GradeController extends Controller
     }
 
     public function store(StoreGrades $request){
-        if(Grade::where('name->ar',$request->Name)->orWhere('name->en',$request->Name_en)->exists()){
-            toastr()->error(trans('messages.Exists'));
-            return redirect()->route('grades.index');
-        }
+        // if(Grade::where('name->ar',$request->Name)->orWhere('name->en',$request->Name_en)->exists()){
+        //     toastr()->error(trans('messages.Exists'));
+        //     return redirect()->route('grades.index');
+        // }
         try{
             $validated = $request->validated();
 
@@ -37,10 +38,10 @@ class GradeController extends Controller
     }
 
     public function update(StoreGrades $request){
-        if(Grade::where('name->ar',$request->Name)->orWhere('name->en',$request->Name_en)->exists()){
-            toastr()->error(trans('messages.Exists'));
-            return redirect()->route('grades.index');
-        }
+        // if(Grade::where('name->ar',$request->Name)->orWhere('name->en',$request->Name_en)->exists()){
+        //     toastr()->error(trans('messages.Exists'));
+        //     return redirect()->route('grades.index');
+        // }
         try{
             $validated = $request->validated();
 
@@ -61,8 +62,15 @@ class GradeController extends Controller
     }
 
     public function destroy(Request $request){
-        Grade::where('id',$request->id)->delete();
-        toastr()->error(trans('messages.Delete'));
-        return redirect()->route('grades.index');
+        $grade=  Grade::where('id',$request->id);
+
+       if(Classroom::where('grade_id',$request->id)->exists()){
+         toastr()->error(trans('messages.cant'));
+         return redirect()->route('grades.index');    
+       }else {
+         $grade->delete();
+         toastr()->error(trans('messages.Delete'));
+         return redirect()->route('grades.index');
+       }
     }
 }

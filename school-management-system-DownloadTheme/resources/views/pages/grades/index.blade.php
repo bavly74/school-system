@@ -38,7 +38,7 @@ empty
                 </div>
                 @endif
                 <button type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal">
-                    {{ trans('grades_trans.add_Grade') }}
+                    {{ trans('classroom.add_class') }}
                 </button><br><br>
                 <div class="table-responsive">
                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50" style="text-align: center">

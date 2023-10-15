@@ -37,6 +37,9 @@ Route::group(
 
         Route::group(['namespace'=>'ClassRooms'],function(){
             Route::get('/classrooms', [ClassroomController::class,'index'])->name('classrooms.index');
+            Route::post('/classrooms-store', [ClassroomController::class,'store'])->name('classrooms.store');
+            Route::post('/classrooms-update', [ClassroomController::class,'update'])->name('classrooms.update');
+            Route::post('/classrooms-delete', [ClassroomController::class,'delete'])->name('classrooms.delete');
 
         });
 
