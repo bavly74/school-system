@@ -9,6 +9,7 @@ return [
     'Grades'=>'المراحل الدراسية',
     'Grades_list'=>'قائمة المراحل الدراسية',
     'classes'=>'الصفوف',
+    'List_sections'=>'قائمة الاقسام',
     'List_classes'=>'قائمة الصفوف الدراسية',
     'sections'=>'الاقسام',
     'students'=>'الطلاب',

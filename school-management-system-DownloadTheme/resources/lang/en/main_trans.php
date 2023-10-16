@@ -10,6 +10,7 @@ return [
     'Grades'=>'Grades ',
     'Grades_list'=>'Grades list  ',
     'classes'=>'classes',
+    'List_sections'=>'List sections',
     'List_classes'=>'List classes',
     'sections'=>'sections',
     'students'=>'students',

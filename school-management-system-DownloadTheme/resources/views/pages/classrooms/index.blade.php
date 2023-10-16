@@ -44,9 +44,21 @@ empty
                     {{ trans('classroom.delete_checkbox') }}
                 </button>
                 <br><br>
+                <form action="{{ route('classrooms.filter-classes') }}" method="POST">
+                    {{ csrf_field() }}
+                    <select class="selectpicker" data-style="btn-info" name="Grade_id" required
+                            onchange="this.form.submit()">
+                        <option value="" selected disabled>{{ trans('classroom.Search_By_Grade') }}</option>
+                        @foreach ($grades as $grade)
+                            <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+                        @endforeach
+                    </select>
+                </form>
+
                 <div class="table-responsive">
                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50" style="text-align: center">
                         <thead>
+                            
                         <th><input type="checkbox" name="select_all" id="example-select-all" onclick="CheckAll('box1', this)"> </th>
                             <th>#</th>
                             <th>{{trans('classroom.Name_class')}}</th>
@@ -55,7 +67,13 @@ empty
                         </thead>
 
                         <tbody>
-                            @foreach($data as $i=>$row)
+                            @if(isset($details))
+                            <?php $classes=$details ?>
+                            @else
+                            <?php $classes=$data ?>
+                            @endif
+
+                            @foreach($classes as $i=>$row)
                             <tr>
                                <td><input type="checkbox" class="box1"  value="{{$row->id}}"></td>
                                 <td>{{++$i}}</td>
@@ -291,7 +309,7 @@ empty
                 </button>
             </div>
 
-            <form action="#" method="POST">
+            <form action="{{route('classrooms.delete-all')}}" method="POST">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     {{ trans('classroom.Warning_Grade') }}

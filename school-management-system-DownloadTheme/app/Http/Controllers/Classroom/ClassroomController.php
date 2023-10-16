@@ -73,5 +73,18 @@ class ClassroomController extends Controller
          toastr()->error(trans('messages.Delete'));
          return redirect()->route('classrooms.index');    
       }
+
+      public function deleteAll(Request $request){
+         $allData=explode(',',$request->delete_all_id);
+         Classroom::whereIn('id',$allData)->delete();
+         toastr()->error(trans('messages.Delete'));
+         return redirect()->route('classrooms.index');    
+      }
+
+      public function filterClasses(Request $request){
+        $grades=Grade::all();
+        $search=Classroom::where('grade_id',$request->Grade_id)->get();
+        return view('pages.classrooms.index',['grades'=>$grades])->withDetails($search);
+      }
    }
 

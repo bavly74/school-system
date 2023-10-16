@@ -3,6 +3,7 @@
 use App\Http\Controllers\Classroom\ClassroomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Grades\GradeController;
+use App\Http\Controllers\Sections\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,20 @@ Route::group(
             Route::post('/classrooms-store', [ClassroomController::class,'store'])->name('classrooms.store');
             Route::post('/classrooms-update', [ClassroomController::class,'update'])->name('classrooms.update');
             Route::post('/classrooms-delete', [ClassroomController::class,'delete'])->name('classrooms.delete');
+            Route::post('/classrooms-delete-all', [ClassroomController::class,'deleteAll'])->name('classrooms.delete-all');
+            Route::post('/classrooms-filter-classes', [ClassroomController::class,'filterClasses'])->name('classrooms.filter-classes');
 
+         
+        });
+
+        Route::group(['namespace'=>'Sections'],function(){
+            Route::get('/sections', [SectionController::class,'index'])->name('sections.index');
+            Route::post('/sections-store', [SectionController::class,'store'])->name('sections.store');
+            Route::get('/classes/{id}', [SectionController::class,'getClasses'])->name('sections.getClasses');
+            Route::post('/sections-update', [SectionController::class,'update'])->name('sections.update');
+            Route::post('/sections-delete', [SectionController::class,'delete'])->name('sections.delete');
+
+            
         });
 
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
