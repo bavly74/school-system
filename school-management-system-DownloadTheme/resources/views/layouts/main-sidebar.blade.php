@@ -45,7 +45,7 @@
                         </a>
                         <ul id="calendar-menu" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{route('classrooms.index')}}">{{ trans('main_trans.List_classes') }} </a> </li>
-                          
+
                         </ul>
                     </li>
 
@@ -59,10 +59,27 @@
                         </a>
                         <ul id="calendar-menu2" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{route('sections.index')}}">{{ trans('main_trans.List_sections') }} </a> </li>
-                          
+
                         </ul>
                     </li>
-                    
+
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu3">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Parents') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu3" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{ url('add-parent') }}">{{ trans('main_trans.List_Parents') }} </a> </li>
+                            <li> <a href="#">{{ trans('main_trans.Add_Parent') }} </a> </li>
+
+
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>

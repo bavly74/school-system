@@ -44,7 +44,7 @@ Route::group(
             Route::post('/classrooms-delete-all', [ClassroomController::class,'deleteAll'])->name('classrooms.delete-all');
             Route::post('/classrooms-filter-classes', [ClassroomController::class,'filterClasses'])->name('classrooms.filter-classes');
 
-         
+
         });
 
         Route::group(['namespace'=>'Sections'],function(){
@@ -54,8 +54,10 @@ Route::group(
             Route::post('/sections-update', [SectionController::class,'update'])->name('sections.update');
             Route::post('/sections-delete', [SectionController::class,'delete'])->name('sections.delete');
 
-            
+
         });
+
+        Route::view('add-parent','livewire.parent-form');
 
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
     });
