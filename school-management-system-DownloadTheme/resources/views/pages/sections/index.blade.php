@@ -182,7 +182,7 @@
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <form action="{{ route('sections.delete', 'test') }}" method="post">
-                                                                                        {{ method_field('Delete') }}
+                                                                                       
                                                                                         @csrf
                                                                                         {{ trans('Sections_trans.Warning_Section') }}
                                                                                         <input id="id" type="hidden" name="id" class="form-control" value="{{ $list_Sections->id }}">

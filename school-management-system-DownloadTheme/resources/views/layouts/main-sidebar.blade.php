@@ -74,7 +74,6 @@
                         </a>
                         <ul id="calendar-menu3" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ url('add-parent') }}">{{ trans('main_trans.List_Parents') }} </a> </li>
-                            <li> <a href="#">{{ trans('main_trans.Add_Parent') }} </a> </li>
 
 
                         </ul>
