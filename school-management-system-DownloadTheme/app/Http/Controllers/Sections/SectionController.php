@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Sections;
 
 use App\Classroom;
 use App\Grade;
+use App\Teacher;
 use App\Http\Controllers\Controller;
 use App\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Laravel\Ui\Presets\React;
 
 class SectionController extends Controller
@@ -14,7 +16,8 @@ class SectionController extends Controller
     public function index (){
         $section_grade=Grade::with('sections')->get();
         $grades=Grade::all();
-        return view ('pages.sections.index',['section_grade'=> $section_grade,'grades'=>$grades]);
+        $teachers=Teacher::all();
+        return view ('pages.sections.index',['section_grade'=> $section_grade,'grades'=>$grades,'teachers'=>$teachers]);
     }
 
     public function store(Request $request){
@@ -23,11 +26,13 @@ class SectionController extends Controller
             'Name_Section_En'=>'required'
         ]);
         try{
-            Section::create([
-                'name'=>['en'=>$request->Name_Section_Ar,'ar'=>$request->Name_Section_En],
-                'grade_id'=>$request->Grade_id,
-                'classroom_id'=>$request->Class_id,
-            ]);
+            $Sections = new Section();
+      $Sections->name = ['ar' => $request->Name_Section_Ar, 'en' => $request->Name_Section_En];
+      $Sections->grade_id = $request->Grade_id;
+      $Sections->classroom_id = $request->Class_id;
+      $Sections->save();
+      $Sections->teachers()->attach($request->teacher_id);
+
             
             toastr()->success(trans('messages.success'));
             return redirect()->route('sections.index');

@@ -4,6 +4,7 @@ use App\Http\Controllers\Classroom\ClassroomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Teachers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,13 @@ Route::group(
             Route::post('/sections-update', [SectionController::class,'update'])->name('sections.update');
             Route::post('/sections-delete', [SectionController::class,'delete'])->name('sections.delete');
 
+
+        });
+
+        Route::group(['namespace'=>'Teachers'],function(){
+            Route::get('/teachers', [TeacherController::class,'index'])->name('teachers.index');
+            Route::get('/teachers-create', [TeacherController::class,'create'])->name('teachers.create');
+            Route::post('/teachers-store', [TeacherController::class,'store'])->name('teachers.store');
 
         });
 

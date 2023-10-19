@@ -79,6 +79,22 @@
                         </ul>
                     </li>
 
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu4">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Teachers') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu4" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('teachers.index') }}">{{ trans('main_trans.List_Teachers') }} </a> </li>
+                            <li> <a href="{{route('teachers.create') }}">{{ trans('Teacher_trans.Add_Teacher') }} </a> </li>
+
+
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>

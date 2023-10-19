@@ -116,16 +116,16 @@
                     {{trans('Parent_trans.Back')}}
                 </button>
 
-                {{-- @if($updateMode)
+                @if($updateMode)
                     <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" wire:click="secondStepSubmit_edit"
                             type="button">{{trans('Parent_trans.Next')}}
                     </button>
                 @else
                     <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="button"
                             wire:click="secondStepSubmit">{{trans('Parent_trans.Next')}}</button>
-                @endif --}}
-                <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="button"
-                wire:click="secondStepSubmit">{{trans('Parent_trans.Next')}}</button>
+                @endif
+
+                
 
             </div>
         </div>

@@ -10,9 +10,13 @@ class Section extends Model
     use HasTranslations;
     public $translatable = ['name'];
 protected $guarded=[];
+
     public function classroom()
     {
         return $this->belongsTo('App\Classroom');
     }
     
+    public function teachers(){
+        return $this->belongsToMany('App\Teacher','teacher_section');
+    }
 }
