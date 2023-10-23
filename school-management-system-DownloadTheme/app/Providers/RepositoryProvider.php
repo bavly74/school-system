@@ -18,6 +18,12 @@ class RepositoryProvider extends ServiceProvider
             'App\Repository\TeacherRepo',
 
         );
+
+        $this->app->bind(
+            'App\Repository\StudentRepoInterface',
+            'App\Repository\StudentRepo',
+
+        );
     }
 
     /**

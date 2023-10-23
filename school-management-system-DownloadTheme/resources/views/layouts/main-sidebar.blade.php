@@ -95,6 +95,22 @@
                         </ul>
                     </li>
 
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu5">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.students') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu5" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{ route('students.create') }}">{{ trans('main_trans.add_student') }} </a> </li>
+                            {{-- <li> <a href="#">{{ trans('Teacher_trans.Add_Teacher') }} </a> </li> --}}
+
+
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>

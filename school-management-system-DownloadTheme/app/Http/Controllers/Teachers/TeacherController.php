@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Teachers;
-
+use App\Http\Requests\StoreTeachers;
 use App\Gender;
 use App\Http\Controllers\Controller;
 use App\Repository\TeacherRepoInterface;
@@ -27,7 +27,19 @@ class TeacherController extends Controller
         return view('pages.teachers.create',['specializations'=>  $specializations,'genders'=>$genders]);
     }
 
-    public function store(Request $r){
+    public function store(StoreTeachers $r){
         return $this->teachers->store($r);
+    }
+
+    public function edit($id){
+        return $this->teachers->edit($id);
+    }
+
+    public function update(StoreTeachers $request){
+        return  $this->teachers->update($request);
+    }
+
+    public function delete(Request $request){
+        return $this->teachers->delete($request);
     }
 }

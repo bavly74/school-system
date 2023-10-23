@@ -157,6 +157,16 @@
                                                                                             </option>
                                                                                         </select>
                                                                                     </div>
+                                                                                    <select multiple name="teacher_id[]" class="form-control" id="exampleFormControlSelect2">
+                                                                                        @foreach($list_Sections->teachers as $teacher)
+                                                                                            <option selected value="{{$teacher['id']}}">{{$teacher['Name']}}</option>
+                                                                                        @endforeach
+
+                                                                                        @foreach($teachers as $teacher)
+                                                                                        <option value="{{$teacher->id}}">{{$teacher->Name}}</option>
+                                                                                    @endforeach
+                                                                                    
+                                                                                    </select>
                                                                                     <br>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -182,7 +192,7 @@
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <form action="{{ route('sections.delete', 'test') }}" method="post">
-                                                                                       
+
                                                                                         @csrf
                                                                                         {{ trans('Sections_trans.Warning_Section') }}
                                                                                         <input id="id" type="hidden" name="id" class="form-control" value="{{ $list_Sections->id }}">
@@ -260,7 +270,7 @@
                                 </select>
                             </div>
 
-                           
+
                             <br>
 
                             <div class="col">

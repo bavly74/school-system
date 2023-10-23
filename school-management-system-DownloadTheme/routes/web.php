@@ -4,6 +4,7 @@ use App\Http\Controllers\Classroom\ClassroomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Teachers\TeacherController;
 
 /*
@@ -62,8 +63,18 @@ Route::group(
             Route::get('/teachers', [TeacherController::class,'index'])->name('teachers.index');
             Route::get('/teachers-create', [TeacherController::class,'create'])->name('teachers.create');
             Route::post('/teachers-store', [TeacherController::class,'store'])->name('teachers.store');
+            Route::get('/teachers-edit/{id}', [TeacherController::class,'edit'])->name('teachers.edit');
+            Route::post('/teachers-update', [TeacherController::class,'update'])->name('teachers.update');
+            Route::post('/teachers-delete', [TeacherController::class,'delete'])->name('teachers.delete');
 
         });
+        Route::group(['namespace'=>'Students'],function(){
+            Route::get('/students-create', [StudentController::class,'create'])->name('students.create');
+            Route::post('/students-store', [StudentController::class,'store'])->name('students.store');
+
+        });
+
+
 
         Route::view('add-parent','livewire.parent-form');
 

@@ -33,7 +33,7 @@ class SectionController extends Controller
       $Sections->save();
       $Sections->teachers()->attach($request->teacher_id);
 
-            
+
             toastr()->success(trans('messages.success'));
             return redirect()->route('sections.index');
         }catch(\Exception $e){
@@ -47,18 +47,26 @@ class SectionController extends Controller
             'Name_Section_En'=>'required'
         ]);
         try{
-            Section::where('id',$request->id)->update([
-                'name'=>['en'=>$request->Name_Section_Ar,'ar'=>$request->Name_Section_En],
-                'grade_id'=>$request->Grade_id,
-                'classroom_id'=>$request->Class_id,
-            ]);
-            
+            $Sections = Section::findOrFail($request->id);
+
+      $Sections->name = ['ar' => $request->Name_Section_Ar, 'en' => $request->Name_Section_En];
+      $Sections->grade_id = $request->Grade_id;
+      $Sections->classroom_id = $request->Class_id;
+
+      if (isset($request->teacher_id)) {
+        $Sections->teachers()->sync($request->teacher_id);
+    } else {
+        $Sections->teachers()->sync(array());
+    }
+    
+    $Sections->save();
+
             toastr()->success(trans('messages.success'));
             return redirect()->route('sections.index');
         }catch(\Exception $e){
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-   
+
     }
 
     public function delete(Request $request){
@@ -69,7 +77,7 @@ class SectionController extends Controller
     }
 
     public function getClasses($id){
-      
+
         return Classroom::where('grade_id',$id)->pluck("name", "id");
     }
 }

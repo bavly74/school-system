@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Gender;
+use App\Specialization;
 use App\Teacher;
 use Illuminate\Http\Request;
 
@@ -41,8 +43,40 @@ class TeacherRepo implements TeacherRepoInterface{
             return redirect()->back()->with(['error' => $e->getMessage()]);
 
         }
-    
+    }
 
+    public function edit($id){
+        $Teachers=Teacher::where('id',$id)->first();
+        $specializations=Specialization::all();
+        $genders=Gender::all();
+        return view('pages.teachers.edit',['Teachers'=>$Teachers,'genders'=>$genders,'specializations'=>$specializations]);
+    }
+
+
+    public function update($request){
+        try{
+            $teacher=Teacher::where('id',$request->id)->first();
+            $teacher->Email=$request->Email;
+            $teacher->Password=$request->Password;
+            $teacher->Name=['ar'=>$request->Name_ar,'en'=>$request->Name_en];
+            $teacher->Specialization_id=$request->Specialization_id;
+            $teacher->Gender_id=$request->Gender_id;
+            $teacher->Joining_Date=$request->Joining_Date;
+            $teacher->Address=$request->Address;
+            $teacher->save();
+            toastr()->success(trans('messages.Update'));
+            return redirect()->route('teachers.index');
+        }catch(\Exception $e){
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
 
     }
+
+    public function delete($request){
+        Teacher::where('id',$request->id)->delete();
+        toastr()->error(trans('messages.Delete'));
+        return redirect()->route('teachers.index');
+    }
+
+
 }
