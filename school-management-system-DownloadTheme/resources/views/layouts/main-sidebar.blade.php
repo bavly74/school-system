@@ -105,7 +105,7 @@
                         </a>
                         <ul id="calendar-menu5" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('students.create') }}">{{ trans('main_trans.add_student') }} </a> </li>
-                            {{-- <li> <a href="#">{{ trans('Teacher_trans.Add_Teacher') }} </a> </li> --}}
+                             <li> <a href="{{ route('students.index') }}">{{ trans('main_trans.list_students') }} </a> </li> 
 
 
                         </ul>

@@ -69,8 +69,17 @@ Route::group(
 
         });
         Route::group(['namespace'=>'Students'],function(){
+            Route::get('/students', [StudentController::class,'index'])->name('students.index');
             Route::get('/students-create', [StudentController::class,'create'])->name('students.create');
             Route::post('/students-store', [StudentController::class,'store'])->name('students.store');
+            Route::get('/Get_classrooms/{id}', [StudentController::class,'getClassrooms']);
+            Route::get('/Get_Sections/{id}', [StudentController::class,'getSections']);
+
+            Route::get('/students-edit/{id}', [StudentController::class,'edit'])->name('students.edit');
+            Route::post('/students-update', [StudentController::class,'update'])->name('students.update');
+
+            Route::post('/students-delete/{id}', [StudentController::class,'delete'])->name('students.delete');
+
 
         });
 

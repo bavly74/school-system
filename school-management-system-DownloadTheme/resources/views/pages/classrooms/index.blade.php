@@ -101,7 +101,7 @@ empty
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <!-- add_form -->
+                                            <!-- edit_form -->
                                             <form action="{{route('classrooms.update')}}" method="post">
                                               
                                                 @csrf
