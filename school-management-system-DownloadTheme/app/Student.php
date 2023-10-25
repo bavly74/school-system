@@ -23,6 +23,14 @@ class Student extends Model
         return $this->belongsTo('App\Classroom','Classroom_id');
     }
 
+    public function Nationality(){
+        return $this->belongsTo('App\Nationality','nationality_id');
+    }
+    
+    public function myparent(){
+        return $this->belongsTo('App\MyParent','parent_id');
+    }
+    
     public function section(){
         return $this->belongsTo('App\Section','section_id');
     }

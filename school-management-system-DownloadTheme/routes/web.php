@@ -68,19 +68,20 @@ Route::group(
             Route::post('/teachers-delete', [TeacherController::class,'delete'])->name('teachers.delete');
 
         });
+
         Route::group(['namespace'=>'Students'],function(){
             Route::get('/students', [StudentController::class,'index'])->name('students.index');
             Route::get('/students-create', [StudentController::class,'create'])->name('students.create');
             Route::post('/students-store', [StudentController::class,'store'])->name('students.store');
             Route::get('/Get_classrooms/{id}', [StudentController::class,'getClassrooms']);
             Route::get('/Get_Sections/{id}', [StudentController::class,'getSections']);
-
+            Route::get('/students-show/{id}', [StudentController::class,'show'])->name('students.show');
             Route::get('/students-edit/{id}', [StudentController::class,'edit'])->name('students.edit');
             Route::post('/students-update', [StudentController::class,'update'])->name('students.update');
-
+            Route::post('/students-upload_attachment', [StudentController::class,'upload_attachment'])->name('students.upload_attachment');
+            Route::get('/Download_attachment/{studentName}/{fileName}', [StudentController::class,'Download_attachment'])->name('students.Download_attachment');
+            Route::post('/students-delete_attachment', [StudentController::class,'deleteAttachment'])->name('students.delete_attachment');
             Route::post('/students-delete/{id}', [StudentController::class,'delete'])->name('students.delete');
-
-
         });
 
 
