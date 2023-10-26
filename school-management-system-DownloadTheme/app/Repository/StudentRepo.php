@@ -134,10 +134,10 @@ class StudentRepo implements StudentRepoInterface{
             $students->section_id = $request->section_id;
             $students->parent_id = $request->parent_id;
             $students->academic_year = $request->academic_year;
-           
             $students->save();
             toastr()->success(trans('messages.Update'));
             return redirect()->route('students.index');
+            
         }
 
         catch (\Exception $e){

@@ -106,6 +106,7 @@
                         <ul id="calendar-menu5" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('students.create') }}">{{ trans('main_trans.add_student') }} </a> </li>
                              <li> <a href="{{ route('students.index') }}">{{ trans('main_trans.list_students') }} </a> </li> 
+                             <li> <a href="{{route('promotions.index')}}">{{ trans('main_trans.Students_Promotions') }} </a> </li> 
 
 
                         </ul>
