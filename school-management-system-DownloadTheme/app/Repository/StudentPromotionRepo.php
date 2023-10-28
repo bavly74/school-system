@@ -104,8 +104,19 @@ class StudentPromotionRepo implements StudentPromotionRepoInterface{
             toastr()->success(trans('messages.success'));
 
             return redirect()->back();
+        }else{
+            $promotion=Promotion::findOrFail($request->id);
+            Student::where('id',$promotion->student_id)->update([
+                'Grade_id'=>$promotion->from_grade,
+                'Classroom_id'=>$promotion->from_Classroom,
+                'section_id'=> $promotion->from_section,
+                'academic_year'=>$promotion->from_year,
+            ]);
+            $promotion->destroy($request->id);
+            toastr()->error(trans('messages.Delete'));
+
+            return redirect()->back();
         }
 
-        return $request;
     }
 }
