@@ -20,7 +20,9 @@ class CreatePromotionsTable extends Migration
             $table->foreignId('from_grade')->constrained('grades')->onDelete('cascade');
             $table->foreignId('from_Classroom')->constrained('classrooms')->onDelete('cascade');
             $table->foreignId('from_section')->constrained('sections')->onDelete('cascade');
+            $table->integer('from_year');
 
+            $table->integer('to_year');
             $table->foreignId('to_grade')->constrained('grades')->onDelete('cascade');
             $table->foreignId('to_Classroom')->constrained('classrooms')->onDelete('cascade');
             $table->foreignId('to_section')->constrained('sections')->onDelete('cascade');

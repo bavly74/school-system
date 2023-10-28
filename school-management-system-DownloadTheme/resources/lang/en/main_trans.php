@@ -9,6 +9,7 @@ return [
     'change_language'=>'language',
     'Grades'=>'Grades',
     'Grades_list'=>'Grades List',
+    'Students_Promotions_management'=>'Students Promotions management',
     'classes'=>'Classes',
     'List_classes' => 'List Classes',
     'sections'=>'Sections',

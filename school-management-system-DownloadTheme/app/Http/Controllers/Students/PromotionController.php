@@ -11,7 +11,7 @@ class PromotionController extends Controller
     public function __construct(StudentPromotionRepoInterface $promotions)
     {
         $this->promotions=$promotions;
-        
+
     }
     public function index(){
         return $this->promotions->index();
@@ -19,6 +19,14 @@ class PromotionController extends Controller
 
     public function store(Request $request){
         return $this->promotions->store($request);
+    }
+
+    public function create(){
+        return $this->promotions->create();
+    }
+
+    public function destroy(Request $request){
+        return $this->promotions->destroy($request);
     }
 
 }

@@ -88,6 +88,9 @@ Route::group(
         Route::group(['namespace'=>'Students'],function(){
             Route::get('/promotions', [PromotionController::class,'index'])->name('promotions.index');
             Route::post('/promotions-store', [PromotionController::class,'store'])->name('promotions.store');
+            Route::get('/promotions-management', [PromotionController::class,'create'])->name('promotions.create');
+
+            Route::post ('/promotions-management-delete-all', [PromotionController::class,'destroy'])->name('promotions.destroy');
 
         });
 

@@ -13,6 +13,7 @@ return [
     'List_classes'=>'قائمة الصفوف الدراسية',
     'sections'=>'الاقسام',
     'List_sections'=>'قائمة الاقسام الدراسية',
+    'Students_Promotions_management'=>'ادارة ترقيات الطلاب',
     'students'=>'الطلاب',
     'Student_information'=>'معلومات الطلاب',
     'add_student'=>'اضافة طالب جديد',
