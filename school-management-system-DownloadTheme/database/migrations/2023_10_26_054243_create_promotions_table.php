@@ -26,6 +26,7 @@ class CreatePromotionsTable extends Migration
             $table->foreignId('to_grade')->constrained('grades')->onDelete('cascade');
             $table->foreignId('to_Classroom')->constrained('classrooms')->onDelete('cascade');
             $table->foreignId('to_section')->constrained('sections')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

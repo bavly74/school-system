@@ -3,7 +3,6 @@
 namespace App\Repository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-
 use App\Image;
 use App\Gender;
 use App\Grade;
@@ -150,6 +149,14 @@ class StudentRepo implements StudentRepoInterface{
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('students.index');
     }
+
+    public function graduate($id){
+        $student=Student::where('id',$id)->first();
+        $student->Delete();
+        toastr()->error(trans('messages.Delete'));
+        return redirect()->route('students.index');
+    }
+
 
 
     public function getClassrooms($id){

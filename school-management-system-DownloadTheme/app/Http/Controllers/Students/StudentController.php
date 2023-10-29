@@ -63,6 +63,11 @@ class StudentController extends Controller
         return $this->students->delete($request);
     }
 
+    public function graduate($id)
+    {
+        return $this->students->graduate($id);
+    }
+
     public function getClassrooms($id)
     {
         return $this->students->getClassrooms($id);

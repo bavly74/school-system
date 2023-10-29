@@ -24,6 +24,7 @@ return [
     'Graduate_students'=>'الطلاب المتخرجين',
     'add_Graduate'=>'اضافة تخرج جديد',
     'list_Graduate'=>'قائمة التخرجات',
+    'Fees'=>'الرسوم الدراسية',
     'Teachers'=>'المعلمين',
     'List_Teachers' => 'قائمة المعلمين',
     'Parents'=>'اولياء الامور',

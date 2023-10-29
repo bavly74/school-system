@@ -4,6 +4,9 @@ use App\Http\Controllers\Classroom\ClassroomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Students\FeeInvoiceController;
+use App\Http\Controllers\Students\FeesController;
+use App\Http\Controllers\Students\GraduatesController;
 use App\Http\Controllers\Students\PromotionController;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Teachers\TeacherController;
@@ -83,16 +86,34 @@ Route::group(
             Route::get('/Download_attachment/{studentName}/{fileName}', [StudentController::class,'Download_attachment'])->name('students.Download_attachment');
             Route::post('/students-delete_attachment', [StudentController::class,'deleteAttachment'])->name('students.delete_attachment');
             Route::post('/students-delete/{id}', [StudentController::class,'delete'])->name('students.delete');
-        });
+            Route::get('/students-graduate/{id}', [StudentController::class,'graduate'])->name('students.graduate');
 
-        Route::group(['namespace'=>'Students'],function(){
             Route::get('/promotions', [PromotionController::class,'index'])->name('promotions.index');
             Route::post('/promotions-store', [PromotionController::class,'store'])->name('promotions.store');
             Route::get('/promotions-management', [PromotionController::class,'create'])->name('promotions.create');
-
             Route::post ('/promotions-management-delete-all', [PromotionController::class,'destroy'])->name('promotions.destroy');
 
+            Route::get('/graduated', [GraduatesController::class,'index'])->name('graduated.index');
+            Route::get('/graduated-create', [GraduatesController::class,'create'])->name('graduated.create');
+            Route::post('/graduated-store', [GraduatesController::class,'store'])->name('graduated.store');
+            Route::post('/graduated-update', [GraduatesController::class,'update'])->name('graduated.update');
+            Route::post('/graduated-destroy', [GraduatesController::class,'destroy'])->name('graduated.destroy');
+
+            Route::get('/fees', [FeesController::class,'index'])->name('fees.index');
+            Route::get('/fees-create', [FeesController::class,'create'])->name('fees.create');
+            Route::post('/fees-store', [FeesController::class,'store'])->name('fees.store');
+            Route::get('/fees-edit/{id}', [FeesController::class,'edit'])->name('fees.edit');
+            Route::post('/fees-update', [FeesController::class,'update'])->name('fees.update');
+            Route::post('/fees-destroy', [FeesController::class,'destroy'])->name('fees.destroy');
+            Route::get('/fees-show/{id}', [FeesController::class,'show'])->name('fees.show');
+
+            Route::get('/fees-invoices/{id}', [FeeInvoiceController::class,'show'])->name('fees-invoices.show');
+            Route::post('/fees-invoices-store', [FeeInvoiceController::class,'store'])->name('fees-invoices.store');
+
+         
+
         });
+
 
 
 

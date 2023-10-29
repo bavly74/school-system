@@ -14,6 +14,8 @@ interface StudentRepoInterface {
     public function edit($id);
     public function update($request);
     public function delete($request);
+    public function graduate($id);
+
     public function getClassrooms($id);
     public function getSections($id);
 }

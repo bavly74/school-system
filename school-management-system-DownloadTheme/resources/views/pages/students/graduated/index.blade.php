@@ -1,14 +1,14 @@
 @extends('layouts.master')
 @section('css')
- 
+    @toastr_css
 @section('title')
-    {{trans('main_trans.list_students')}}
+    {{trans('main_trans.list_Graduate')}}
 @stop
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
 @section('PageTitle')
-    {{trans('main_trans.list_students')}}
+    {{trans('main_trans.list_Graduate')}} <i class="fas fa-user-graduate"></i>
 @stop
 <!-- breadcrumb -->
 @endsection
@@ -21,14 +21,12 @@
                     <div class="col-xl-12 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
-                                <a href="{{route('students.create')}}" class="btn btn-success btn-sm" role="button"
-                                   aria-pressed="true">{{trans('main_trans.add_student')}}</a><br><br>
                                 <div class="table-responsive">
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                            data-page-length="50"
                                            style="text-align: center">
                                         <thead>
-                                        <tr>
+                                        <tr class="alert-success">
                                             <th>#</th>
                                             <th>{{trans('Students_trans.name')}}</th>
                                             <th>{{trans('Students_trans.email')}}</th>
@@ -50,23 +48,13 @@
                                             <td>{{$student->classroom->name}}</td>
                                             <td>{{$student->section->name}}</td>
                                                 <td>
-                                                    
-                                                    <div class="dropdown show">
-                                                        <a class="btn btn-success btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            العمليات
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <a class="dropdown-item" href="{{route('students.show',$student->id)}}"><i style="color: #ffc107" class="fa solid fa-eye "></i>&nbsp;  عرض بيانات الطالب</a>
-                                                            <a class="dropdown-item" href="{{route('students.edit',$student->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;  تعديل بيانات الطالب</a>
-                                                            <a class="dropdown-item" href="{{route('fees-invoices.show',$student->id)}}"><i style="color: #0000cc" class="fa fa-edit"></i>&nbsp;اضافة فاتورة رسوم&nbsp;</a>
-                                                            <a class="dropdown-item" data-target="#Delete_Student{{ $student->id }}" data-toggle="modal" href="##Delete_Student{{ $student->id }}"><i style="color: red" class="fa fa-trash"></i>&nbsp;  حذف بيانات الطالب</a>
-                                                            
-                                                        <a class="dropdown-item" href="{{route('students.graduate',$student->id)}}">&nbsp; graduate</a>
-                                                        </div>  
-                                                    </div>
+                                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Return_Student{{ $student->id }}" title="{{ trans('Grades_trans.Delete') }}">ارجاع الطالب</button>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Delete_Student{{ $student->id }}" title="{{ trans('Grades_trans.Delete') }}">حذف الطالب</button>
+
                                                 </td>
                                             </tr>
-                                        @include('pages.students.delete')
+                                        @include('pages.students.graduated.return')
+                                        @include('pages.students.graduated.delete')
                                         @endforeach
                                     </table>
                                 </div>
