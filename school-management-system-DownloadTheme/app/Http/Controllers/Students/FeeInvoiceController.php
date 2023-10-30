@@ -15,29 +15,32 @@ class FeeInvoiceController extends Controller
     }
    
     public function index(){
-        
+        return $this->feeInvoice->index();
     }
-    public function create(){
-       
-    }
-    public function store($request){
-        
 
+    public function create($id){
+        return $this->feeInvoice->create($id);
+    }
+
+    public function store(Request $request){
+        return $this->feeInvoice->store($request);
+
+    }
+
+  
+    public function edit($id){
+        return $this->feeInvoice->edit($id);
+    }
+
+    public function update(Request $request){
+        return $this->feeInvoice->update($request);
+   }
+
+    public function destroy(Request $request){
+        return $this->feeInvoice->destroy($request);
     }
 
     public function show($id){
         return $this->feeInvoice->show($id);
-    }
-    
-    public function edit($id){
-        
-    }
-
-    public function update($request){
-        
-   }
-
-    public function destroy($request){
-       
     }
 }

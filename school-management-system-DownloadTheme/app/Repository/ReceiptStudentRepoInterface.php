@@ -3,7 +3,7 @@ namespace App\Repository;
 
 use Illuminate\Http\Request;
 
-interface FeesInvoiceRepoInterface {
+interface ReceiptStudentRepoInterface {
     public function index();
     public function create($id);
     public function store($request);

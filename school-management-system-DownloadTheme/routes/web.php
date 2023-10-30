@@ -7,9 +7,13 @@ use App\Http\Controllers\Sections\SectionController;
 use App\Http\Controllers\Students\FeeInvoiceController;
 use App\Http\Controllers\Students\FeesController;
 use App\Http\Controllers\Students\GraduatesController;
+use App\Http\Controllers\Students\ProcessingFeeController;
 use App\Http\Controllers\Students\PromotionController;
+use App\Http\Controllers\Students\ReceiptStudentController;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Teachers\TeacherController;
+use App\ProcessingFee;
+use App\ReceiptStudent;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,10 +111,29 @@ Route::group(
             Route::post('/fees-destroy', [FeesController::class,'destroy'])->name('fees.destroy');
             Route::get('/fees-show/{id}', [FeesController::class,'show'])->name('fees.show');
 
-            Route::get('/fees-invoices/{id}', [FeeInvoiceController::class,'show'])->name('fees-invoices.show');
+            Route::get('/fees-invoices', [FeeInvoiceController::class,'index'])->name('fees-invoices.index');
+            Route::get('/fees-invoices/{id}', [FeeInvoiceController::class,'create'])->name('fees-invoices.create');
             Route::post('/fees-invoices-store', [FeeInvoiceController::class,'store'])->name('fees-invoices.store');
+            Route::get('/fees-invoices-edit/{id}', [FeeInvoiceController::class,'edit'])->name('fees-invoices.edit');
+            Route::post('/fees-invoices-update', [FeeInvoiceController::class,'update'])->name('fees-invoices.update');
+            Route::post('/fees-invoices-destroy', [FeeInvoiceController::class,'destroy'])->name('fees-invoices.destroy');
 
-         
+            Route::get('/receipt-students', [ReceiptStudentController::class,'index'])->name('receipt-students.index');
+            Route::get('/receipt-students-create/{id}', [ReceiptStudentController::class,'create'])->name('receipt-students.create');
+            Route::post('/receipt-students-store', [ReceiptStudentController::class,'store'])->name('receipt-students.store');
+            Route::get('/receipt-students-edit/{id}', [ReceiptStudentController::class,'edit'])->name('receipt-students.edit');
+            Route::post('/receipt-students-update', [ReceiptStudentController::class,'update'])->name('receipt-students.update');
+            Route::post('/receipt-students-destroy', [ReceiptStudentController::class,'destroy'])->name('receipt-students.destroy');
+
+            Route::get('/processing-fees', [ProcessingFeeController::class,'index'])->name('processing-fees.index');
+            Route::get('/processing-fees-create/{id}', [ProcessingFeeController::class,'create'])->name('processing-fees.create');
+            Route::post('/processing-fees-store', [ProcessingFeeController::class,'store'])->name('processing-fees.store');
+            Route::get('/processing-fees-edit/{id}', [ProcessingFeeController::class,'edit'])->name('processing-fees.edit');
+            Route::post('/processing-fees-update', [ProcessingFeeController::class,'update'])->name('processing-fees.update');
+            Route::post('/processing-fees-destroy', [ProcessingFeeController::class,'destroy'])->name('processing-fees.destroy');
+
+
+
 
         });
 

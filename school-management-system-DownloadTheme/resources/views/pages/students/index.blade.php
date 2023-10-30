@@ -58,10 +58,13 @@
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                             <a class="dropdown-item" href="{{route('students.show',$student->id)}}"><i style="color: #ffc107" class="fa solid fa-eye "></i>&nbsp;  عرض بيانات الطالب</a>
                                                             <a class="dropdown-item" href="{{route('students.edit',$student->id)}}"><i style="color:green" class="fa fa-edit"></i>&nbsp;  تعديل بيانات الطالب</a>
-                                                            <a class="dropdown-item" href="{{route('fees-invoices.show',$student->id)}}"><i style="color: #0000cc" class="fa fa-edit"></i>&nbsp;اضافة فاتورة رسوم&nbsp;</a>
+                                                            <a class="dropdown-item" href="{{route('fees-invoices.create',$student->id)}}"><i style="color: #0000cc" class="fa fa-edit"></i>&nbsp;اضافة فاتورة رسوم&nbsp;</a>
+                                                            <a class="dropdown-item" href="{{route('receipt-students.create',$student->id)}}"><i class="fa-solid fa-money-bill"></i>&nbsp; &nbsp;سند قبض</a>
+                                                            <a class="dropdown-item" href="{{route('processing-fees.create',$student->id)}}"><i class="fa-solid fa-money-bill"></i>&nbsp; &nbsp; معالجة رسوم</a>
+
                                                             <a class="dropdown-item" data-target="#Delete_Student{{ $student->id }}" data-toggle="modal" href="##Delete_Student{{ $student->id }}"><i style="color: red" class="fa fa-trash"></i>&nbsp;  حذف بيانات الطالب</a>
                                                             
-                                                        <a class="dropdown-item" href="{{route('students.graduate',$student->id)}}">&nbsp; graduate</a>
+                                                        <a class="dropdown-item" href="{{route('students.graduate',$student->id)}}"><i class="fa-solid fa-user-graduate"></i>&nbsp; graduate</a>
                                                         </div>  
                                                     </div>
                                                 </td>

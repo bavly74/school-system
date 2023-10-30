@@ -133,8 +133,9 @@
                         </a>
                         <ul id="calendar-menu6" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{route('fees.index') }}">{{ trans('main_trans.Fees') }} </a> </li>
-                            <li> <a href="#">{{ trans('Teacher_trans.Fees') }} </a> </li>
-
+                            <li> <a href="{{route('fees-invoices.index') }}">{{ trans('main_trans.Fees_invoices') }} </a> </li>
+                            <li> <a href="{{route('receipt-students.index')}}"> {{ trans('main_trans.Receipts') }}</a> </li>
+                            <li> <a href="{{route('processing-fees.index')}}"> {{ trans('main_trans.processing_fees') }}</a> </li>
 
                         </ul>
                     </li>

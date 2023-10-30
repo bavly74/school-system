@@ -48,6 +48,18 @@ class RepositoryProvider extends ServiceProvider
             'App\Repository\FeesInvoiceRepo',
 
         );
+
+        $this->app->bind(
+            'App\Repository\ReceiptStudentRepoInterface',
+            'App\Repository\ReceiptStudentRepo',
+
+        );
+
+        $this->app->bind(
+            'App\Repository\ProcessingFeesRepoInterface',
+            'App\Repository\ProcessingFeesRepo',
+
+        );
     }
 
     /**
