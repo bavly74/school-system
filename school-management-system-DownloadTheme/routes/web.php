@@ -1,9 +1,14 @@
 <?php
 
+use App\Attendance;
 use App\Http\Controllers\Classroom\ClassroomController;
+use App\Http\Controllers\Exams\ExamController;
+use App\Http\Controllers\Students\AttendanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Grades\GradeController;
+use App\Http\Controllers\Quizes\QuizController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Students\PaymentStudentController;
 use App\Http\Controllers\Students\FeeInvoiceController;
 use App\Http\Controllers\Students\FeesController;
 use App\Http\Controllers\Students\GraduatesController;
@@ -11,6 +16,7 @@ use App\Http\Controllers\Students\ProcessingFeeController;
 use App\Http\Controllers\Students\PromotionController;
 use App\Http\Controllers\Students\ReceiptStudentController;
 use App\Http\Controllers\Students\StudentController;
+use App\Http\Controllers\Subjects\SubjectController;
 use App\Http\Controllers\Teachers\TeacherController;
 use App\ProcessingFee;
 use App\ReceiptStudent;
@@ -132,13 +138,48 @@ Route::group(
             Route::post('/processing-fees-update', [ProcessingFeeController::class,'update'])->name('processing-fees.update');
             Route::post('/processing-fees-destroy', [ProcessingFeeController::class,'destroy'])->name('processing-fees.destroy');
 
+            Route::get('/payment', [PaymentStudentController::class,'index'])->name('payment.index');
+            Route::get('/payment-create/{id}', [PaymentStudentController::class,'create'])->name('payment.create');
+            Route::post('/payment-store', [PaymentStudentController::class,'store'])->name('payment.store');
+            Route::get('/payment-edit/{id}', [PaymentStudentController::class,'edit'])->name('payment.edit');
+            Route::post('/payment-update', [PaymentStudentController::class,'update'])->name('payment.update');
+            Route::post('/payment-destroy', [PaymentStudentController::class,'destroy'])->name('payment.destroy');
 
+            Route::get('/attendance', [AttendanceController::class,'index'])->name('attendance.index');
+            Route::get('/attendance-create/{id}', [AttendanceController::class,'create'])->name('attendance.create');
+            Route::post('/attendance-store', [AttendanceController::class,'store'])->name('attendance.store');
+        });
 
+        Route::group(['namespace'=>'Subjects'],function(){
+            Route::get('/subjects', [SubjectController::class,'index'])->name('subjects.index');
+            Route::get('/subjects-create', [SubjectController::class,'create'])->name('subjects.create');
+            Route::post('/subjects-store', [SubjectController::class,'store'])->name('subjects.store');
+            Route::get('/subjects-edit/{id}', [SubjectController::class,'edit'])->name('subjects.edit');
+            Route::post('/subjects-update', [SubjectController::class,'update'])->name('subjects.update');
+            Route::post('/subjects-destroy', [SubjectController::class,'destroy'])->name('subjects.destroy');
+            Route::get('/subjects-show/{id}', [SubjectController::class,'show'])->name('subjects.show');
+        });
 
+        Route::group(['namespace'=>'Exams'],function(){
+            Route::get('/exams', [ExamController::class,'index'])->name('exams.index');
+            Route::get('/exams-create', [ExamController::class,'create'])->name('exams.create');
+            Route::post('/exams-store', [ExamController::class,'store'])->name('exams.store');
+            Route::get('/exams-edit/{id}', [ExamController::class,'edit'])->name('exams.edit');
+            Route::post('/exams-update', [ExamController::class,'update'])->name('exams.update');
+            Route::post('/exams-destroy', [ExamController::class,'destroy'])->name('exams.destroy');
+            Route::get('/exams-show/{id}', [ExamController::class,'show'])->name('exams.show');
         });
 
 
-
+        Route::group(['namespace'=>'Quizes'],function(){
+            Route::get('/quizzes', [QuizController::class,'index'])->name('quizzes.index');
+            Route::get('/quizzes-create', [QuizController::class,'create'])->name('quizzes.create');
+            Route::post('/quizzes-store', [QuizController::class,'store'])->name('quizzes.store');
+            Route::get('/quizzes-edit/{id}', [QuizController::class,'edit'])->name('quizzes.edit');
+            Route::post('/quizzes-update', [QuizController::class,'update'])->name('quizzes.update');
+            Route::post('/quizzes-destroy', [QuizController::class,'destroy'])->name('quizzes.destroy');
+            Route::get('/quizzes-show/{id}', [QuizController::class,'show'])->name('quizzes.show');
+        });
 
         Route::view('add-parent','livewire.parent-form');
 

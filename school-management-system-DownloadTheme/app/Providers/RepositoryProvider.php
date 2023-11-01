@@ -60,6 +60,36 @@ class RepositoryProvider extends ServiceProvider
             'App\Repository\ProcessingFeesRepo',
 
         );
+
+        $this->app->bind(
+            'App\Repository\PaymentRepoInterface',
+            'App\Repository\PaymentRepo',
+
+        );
+
+        $this->app->bind(
+            'App\Repository\AttendanceRepoInterface',
+            'App\Repository\AttendanceRepo',
+
+        );
+
+        $this->app->bind(
+            'App\Repository\SubjectsRepoInterface',
+            'App\Repository\SubjectsRepo',
+
+        );
+
+        $this->app->bind(
+            'App\Repository\ExamsRepoInterface',
+            'App\Repository\ExamsRepo',
+
+        );
+
+        $this->app->bind(
+            'App\Repository\QuizesRepoInterface',
+            'App\Repository\QuizesRepo',
+
+        );
     }
 
     /**

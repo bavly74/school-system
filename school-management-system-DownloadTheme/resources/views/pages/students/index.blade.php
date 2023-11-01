@@ -61,6 +61,7 @@
                                                             <a class="dropdown-item" href="{{route('fees-invoices.create',$student->id)}}"><i style="color: #0000cc" class="fa fa-edit"></i>&nbsp;اضافة فاتورة رسوم&nbsp;</a>
                                                             <a class="dropdown-item" href="{{route('receipt-students.create',$student->id)}}"><i class="fa-solid fa-money-bill"></i>&nbsp; &nbsp;سند قبض</a>
                                                             <a class="dropdown-item" href="{{route('processing-fees.create',$student->id)}}"><i class="fa-solid fa-money-bill"></i>&nbsp; &nbsp; معالجة رسوم</a>
+                                                            <a class="dropdown-item" href="{{route('payment.create',$student->id)}}"><i class="fa-solid fa-money-bill"></i>&nbsp; &nbsp;  استرجاع رسوم</a>
 
                                                             <a class="dropdown-item" data-target="#Delete_Student{{ $student->id }}" data-toggle="modal" href="##Delete_Student{{ $student->id }}"><i style="color: red" class="fa fa-trash"></i>&nbsp;  حذف بيانات الطالب</a>
                                                             

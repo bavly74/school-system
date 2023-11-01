@@ -11,10 +11,7 @@ use App\Nationality;
 use App\Blood;
 use App\Classroom;
 use App\Section;
-use App\Specialization;
 use App\Student;
-use App\Teacher;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class StudentRepo implements StudentRepoInterface{

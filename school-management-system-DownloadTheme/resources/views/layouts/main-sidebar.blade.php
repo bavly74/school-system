@@ -135,10 +135,70 @@
                             <li> <a href="{{route('fees.index') }}">{{ trans('main_trans.Fees') }} </a> </li>
                             <li> <a href="{{route('fees-invoices.index') }}">{{ trans('main_trans.Fees_invoices') }} </a> </li>
                             <li> <a href="{{route('receipt-students.index')}}"> {{ trans('main_trans.Receipts') }}</a> </li>
+                            <li> <a href="{{route('payment.index')}}"> {{ trans('main_trans.Payments') }}</a> </li>
                             <li> <a href="{{route('processing-fees.index')}}"> {{ trans('main_trans.processing_fees') }}</a> </li>
 
                         </ul>
                     </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu7">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Attendance') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu7" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('attendance.index') }}">{{ trans('main_trans.Attendance') }} </a> </li>
+                            
+
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu8">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Subjects') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu8" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('subjects.index') }}">{{ trans('main_trans.Subjects') }} </a> </li>
+                            
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu9">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Exams') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu9" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('exams.index') }}">{{ trans('main_trans.Exams') }} </a> </li>
+                            
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu10">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Quizzes') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu10" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('quizzes.index') }}">{{ trans('main_trans.Quizzes') }} </a> </li>
+                            
+                        </ul>
+                    </li>
+
+                    
+
 
                 </li>
 

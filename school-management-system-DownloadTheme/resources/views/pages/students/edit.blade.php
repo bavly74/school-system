@@ -28,7 +28,7 @@
                         </ul>
                     </div>
                 @endif
-
+                <!-- {{$Students->password}} -->
                     <form action="{{route('students.update','test')}}" method="post" autocomplete="off">
                         <!-- @method('PUT') -->
                         @csrf
