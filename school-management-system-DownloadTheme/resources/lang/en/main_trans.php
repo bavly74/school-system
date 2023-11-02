@@ -18,6 +18,8 @@ return [
     'add_student'=>'Add student',
     'list_students'=>'list Students',
     'Fees'=>'Fees',
+    'Questions'=>'Questions',
+    'Online_classes'=>' Online classes',
     'Subjects'=>'Subjects',
     'Quizzes'=>'Quizzes',
     'Exams'=>'Exams',

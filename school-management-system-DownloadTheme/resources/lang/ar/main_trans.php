@@ -24,6 +24,8 @@ return [
     'Subjects'=>'المواد الدراسية',
     'Exams'=>'الامتحانات',
     'Quizzes'=>'الاختبارات',
+    'Questions'=>'الاسئلة',
+    'Online_classes'=>'حصص اونلاين',
     'Graduate_students'=>'الطلاب المتخرجين',
     'Payments'=>'سندات الصرف',
     'add_Graduate'=>'اضافة تخرج جديد',

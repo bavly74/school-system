@@ -90,9 +90,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="Classroom_id">{{trans('Students_trans.classrooms')}} : <span class="text-danger">*</span></label>
-                                            <select class="custom-select mr-sm-2" name="Class_id">
-
-                                            </select>
+                                            <select class="custom-select mr-sm-2" name="Classroom_id">
+                                                <option value="{{$quizz->classroom_id}}">{{$quizz->classroom->name}}</option>                                            </select>
                                         </div>
                                     </div>
 
@@ -100,7 +99,7 @@
                                         <div class="form-group">
                                             <label for="section_id">{{trans('Students_trans.section')}} : </label>
                                             <select class="custom-select mr-sm-2" name="section_id">
-
+                                                <option value="{{$quizz->section_id}}">{{$quizz->section->name}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -119,5 +118,31 @@
 @section('js')
     @toastr_js
     @toastr_render
- 
+    <script>
+    $(document).ready(function () {
+        $('select[name="Grade_id"]').on('change', function () {
+            var Grade_id = $(this).val();
+            if (Grade_id) {
+                $.ajax({
+                    url: "{{ URL::to('Get_classrooms') }}/" + Grade_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('select[name="Classroom_id"]').empty();
+                        $('select[name="Classroom_id"]').append('<option selected disabled >{{trans('Parent_trans.Choose')}}...</option>');
+
+                        $.each(data, function (key, value) {
+                            $('select[name="Classroom_id"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
+
+                    },
+                });
+            }
+
+            else {
+                console.log('AJAX load did not work');
+            }
+        });
+    });
+</script>
 @endsection   

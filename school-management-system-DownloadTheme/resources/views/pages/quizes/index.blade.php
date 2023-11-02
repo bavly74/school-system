@@ -74,15 +74,15 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p> {{ trans('My_Classes_trans.Warning_Grade') }} {{$quizze->name}}</p>
+                                                                <p> {{ trans('classroom.Warning_Grade') }} {{$quizze->name}}</p>
                                                                 <input type="hidden" name="id" value="{{$quizze->id}}">
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">{{ trans('My_Classes_trans.Close') }}</button>
+                                                                            data-dismiss="modal">{{ trans('classroom.Close') }}</button>
                                                                     <button type="submit"
-                                                                            class="btn btn-danger">{{ trans('My_Classes_trans.submit') }}</button>
+                                                                            class="btn btn-danger">{{ trans('classroom.submit') }}</button>
                                                                 </div>
                                                             </div>
                                                         </div>

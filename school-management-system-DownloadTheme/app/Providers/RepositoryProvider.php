@@ -90,6 +90,19 @@ class RepositoryProvider extends ServiceProvider
             'App\Repository\QuizesRepo',
 
         );
+
+        $this->app->bind(
+            'App\Repository\QuestionRepoInterface',
+            'App\Repository\QuestionRepo',
+
+        );
+
+        
+        $this->app->bind(
+            'App\Repository\ZoomMeetingRepoInterface',
+            'App\Repository\ZoomMeetingRepo',
+
+        );
     }
 
     /**

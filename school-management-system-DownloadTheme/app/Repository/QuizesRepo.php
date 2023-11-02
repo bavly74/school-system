@@ -56,10 +56,27 @@ class QuizesRepo implements QuizesRepoInterface{
     }
 
     public function update($request){
-        
+        try{
+            Quiz::where('id',$request->id)->update([
+                'name'=>['en'=>$request->Name_en,'ar'=>$request->Name_ar],
+                'subject_id'=>$request->subject_id,
+                'grade_id'=>$request->Grade_id,
+                'classroom_id'=>$request->Classroom_id,
+                'section_id'=>$request->section_id,
+                'teacher_id'=>$request->teacher_id
+            ]); 
+            toastr()->success(trans('messages.Updete'));
+            return redirect()->route('quizzes.index');
+
+        }catch(\Exception $e){
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
 }
 public function destroy($request){
-    
+    Quiz::destroy($request->id);
+    toastr()->error(trans('messages.Delete'));
+            return redirect()->route('quizzes.index');
+
 }
 
 

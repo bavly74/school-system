@@ -193,9 +193,25 @@
                         </a>
                         <ul id="calendar-menu10" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{route('quizzes.index') }}">{{ trans('main_trans.Quizzes') }} </a> </li>
-                            
+                            <li> <a href="{{route('questions.index') }}">{{ trans('main_trans.Questions') }} </a> </li>
+
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu11">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Online_classes') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu11" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('online-class.index') }}">{{ trans('main_trans.Online_classes') }} </a> </li>
+
+                        </ul>
+                    </li>
+
+                    
 
                     
 
