@@ -22,7 +22,10 @@
                         <div class="card card-statistics h-100">
                             <div class="card-body">
                                 <a href="{{route('online-class.create')}}" class="btn btn-success btn-sm" role="button"
-                                   aria-pressed="true">اضافة حصة جديدة</a><br><br>
+                                   aria-pressed="true">اضافة حصة جديدة</a>
+                                   <a class="btn btn-warning" href="{{route('indirect-meeting.create')}}">اضافة حصة اوفلاين جديدة</a>
+                                   <br><br>
+
                                 <div class="table-responsive">
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                            data-page-length="50"
@@ -45,9 +48,9 @@
                                         @foreach($online_classes as $online_classe)
                                             <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{$online_classe->grade->Name}}</td>
-                                            <td>{{ $online_classe->classroom->Name_Class }}</td>
-                                            <td>{{$online_classe->section->Name_Section}}</td>
+                                            <td>{{$online_classe->grade->name}}</td>
+                                            <td>{{ $online_classe->classroom->name }}</td>
+                                            <td>{{$online_classe->section->name}}</td>
                                                 <td>{{$online_classe->user->name}}</td>
                                                 <td>{{$online_classe->topic}}</td>
                                                 <td>{{$online_classe->start_at}}</td>

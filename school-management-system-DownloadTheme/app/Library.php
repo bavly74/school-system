@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OnlineClass extends Model
+class Library extends Model
 {
-    protected $guarded=[];
     public function grade()
     {
         return $this->belongsTo('App\Grade', 'Grade_id');
@@ -18,14 +17,14 @@ class OnlineClass extends Model
         return $this->belongsTo('App\Classroom', 'Classroom_id');
     }
 
-
     public function section()
     {
         return $this->belongsTo('App\Section', 'section_id');
     }
 
-    public function user()
+    public function teacher()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo('App\Teacher', 'teacher_id');
     }
+
 }

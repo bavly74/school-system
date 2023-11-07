@@ -1,5 +1,4 @@
 <?php
-
 use App\Attendance;
 use App\Http\Controllers\Classroom\ClassroomController;
 use App\Http\Controllers\Exams\ExamController;
@@ -13,6 +12,7 @@ use App\Http\Controllers\Students\PaymentStudentController;
 use App\Http\Controllers\Students\FeeInvoiceController;
 use App\Http\Controllers\Students\FeesController;
 use App\Http\Controllers\Students\GraduatesController;
+use App\Http\Controllers\Students\LibraryController;
 use App\Http\Controllers\Students\OnlineClassController;
 use App\Http\Controllers\Students\ProcessingFeeController;
 use App\Http\Controllers\Students\PromotionController;
@@ -20,6 +20,8 @@ use App\Http\Controllers\Students\ReceiptStudentController;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Subjects\SubjectController;
 use App\Http\Controllers\Teachers\TeacherController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SettingController;
 use App\OnlineClass;
 use App\ProcessingFee;
 use App\Question;
@@ -35,19 +37,26 @@ use App\ReceiptStudent;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+// Auth::routes();
+Route::get('/', 'HomeController@index')->name('selection');
 
-Route::group(['middleware'=>['guest']],function(){
-    Route::get('/', function () {
-        return view('auth.login');
-    });
+Route::group(['namespace' => 'Auth'], function () {
+
+    Route::get('/login/{type}',[LoginController::class,'loginForm'])->middleware('guest')->name('login.show');
+    
+    Route::post('/login','LoginController@login')->name('login');
+    Route::get('/logout/{type}', 'LoginController@logout')->name('logout');
 });
+ 
 
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','auth' ]
     ], function(){
+
+       Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+
         Route::group(['namespace'=>'Grades'],function(){
             Route::get('/grades', [GradeController::class,'index'])->name('grades.index');
             Route::post('/grades-store', [GradeController::class,'store'])->name('grades.store');
@@ -156,6 +165,18 @@ Route::group(
             Route::get('/online-class', [OnlineClassController::class,'index'])->name('online-class.index');
             Route::get('/online-class-create', [OnlineClassController::class,'create'])->name('online-class.create');
             Route::post('/online-class-store', [OnlineClassController::class,'store'])->name('online-class.store');
+            
+            Route::get('/indirect-meeting', [OnlineClassController::class,'createIndirectMeeting'])->name('indirect-meeting.create');
+            Route::post('/indirect-meeting', [OnlineClassController::class,'storeIndirectMeeting'])->name('indirect-meeting.store');
+            Route::post('/online-class-destroy', [OnlineClassController::class,'destroy'])->name('online-class.destroy');
+
+            Route::get('/library', [LibraryController::class,'index'])->name('library.index');
+            Route::get('/library-create', [LibraryController::class,'create'])->name('library.create');
+            Route::post('/library-store', [LibraryController::class,'store'])->name('library.store');
+            Route::get('/library-downloadAttachment/{filename}', [LibraryController::class,'downloadAttachment'])->name('library.downloadAttachment');
+            Route::get('/library-edit/{id}', [LibraryController::class,'edit'])->name('library.edit');
+            Route::post('/library-update', [LibraryController::class,'update'])->name('library.update');
+            Route::post('/library-delete', [LibraryController::class,'destroy'])->name('library.delete');
 
         });
 
@@ -200,10 +221,18 @@ Route::group(
             Route::get('/questions-show/{id}', [QuestionController::class,'show'])->name('questions.show');
         });
 
+        Route::group(['namespace'=>'Setting'],function(){
+            Route::get('/settings', [SettingController::class,'index'])->name('settings.index');
+            Route::post('/settings-update', [SettingController::class,'update'])->name('settings.update');
+
+
+        });
 
         Route::view('add-parent','livewire.parent-form');
 
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    // Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::get('/selection', function(){return view('auth.selection');});
+
     });
 
 

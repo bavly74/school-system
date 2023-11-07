@@ -9,10 +9,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('online_classes.destroy','test')}}" method="post">
+                <form action="{{route('online-class.destroy','test')}}" method="post">
                     @csrf
 
-                    <input type="hidden" name="id" value="{{$online_classe->meeting_id}}">
+                    <input type="hidden" name="id" value="{{$online_classe->id}}">
                     <h5 style="font-family: 'Cairo', sans-serif;">هل انت متاكد مع عملية الحذف ؟</h5>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('Students_trans.Close')}}</button>

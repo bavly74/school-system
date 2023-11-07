@@ -16,10 +16,21 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        if (Auth::guard($guard)->check()) {
+        if(auth('web')->check()){
             return redirect(RouteServiceProvider::HOME);
+        }
+        if (auth('student')->check()) {
+            return redirect(RouteServiceProvider::STUDENT);
+        }
+
+        if (auth('parent')->check()) {
+            return redirect(RouteServiceProvider::PARENT);
+        }
+
+        if (auth('teacher')->check()) {
+            return redirect(RouteServiceProvider::TEACHER);
         }
 
         return $next($request);

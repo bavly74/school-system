@@ -103,6 +103,17 @@ class RepositoryProvider extends ServiceProvider
             'App\Repository\ZoomMeetingRepo',
 
         );
+        $this->app->bind(
+            'App\Repository\LibraryRepoInterface',
+            'App\Repository\LibraryRepo',
+
+        );
+
+        $this->app->bind(
+            'App\Repository\SettingRepoInterface',
+            'App\Repository\SettingRepo',
+
+        );
     }
 
     /**

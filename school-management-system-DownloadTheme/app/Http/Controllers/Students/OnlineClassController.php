@@ -21,9 +21,18 @@ class OnlineClassController extends Controller
 
     }
     
-    public function delete(Request $request){
-        return $this->meeting->delete($request);
+    public function destroy(Request $request){
+        return $this->meeting->destroy($request);
     }
+
+    public function createIndirectMeeting(){
+        return $this->meeting->createIndirectMeeting();
+    }
+    public function storeIndirectMeeting(Request $request){
+        return $this->meeting->storeIndirectMeeting($request);
+
+    }
+
 
 
 }
