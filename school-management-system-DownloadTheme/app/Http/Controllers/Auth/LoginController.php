@@ -20,8 +20,7 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
-   //    use AuthenticatesUsers;
+ //  use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -35,15 +34,17 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function loginForm($type){
-        return view('auth.login',compact('type'));
-    }
-
+    
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
+    
+    public function loginForm($type){
+        return view('auth.login',compact('type'));
+    }
 
+//we can use AtuhTrait instead
     public function login(Request $request){
         if($request->type == 'student'){
             $guardName= 'student';

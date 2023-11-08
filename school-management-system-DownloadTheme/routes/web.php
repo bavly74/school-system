@@ -228,7 +228,7 @@ Route::group(
 
         });
 
-        Route::view('add-parent','livewire.parent-form');
+        Route::view('add-parent','livewire.parent-form')->name('add_parent');
 
     // Route::get('/dashboard', 'HomeController@index')->name('dashboard');
     Route::get('/selection', function(){return view('auth.selection');});
