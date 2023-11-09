@@ -15,8 +15,8 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('Email')->unique();
-            $table->string('Password');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('Name');
            
             $table->foreignId('Specialization_id')->constrained('specializations')->onDelete('cascade');

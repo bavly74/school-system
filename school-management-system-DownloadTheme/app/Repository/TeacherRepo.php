@@ -29,8 +29,8 @@ class TeacherRepo implements TeacherRepoInterface{
 
         try{
             Teacher::create([
-                'Email'=>$r->Email,
-                'Password'=>$r->Password,
+                'email'=>$r->Email,
+                'password'=>$r->Password,
                 'Name'=>['ar'=>$r->Name_ar,'en'=>$r->Name_en],
                 'Specialization_id'=>$r->Specialization_id,
                 'Gender_id'=>$r->Gender_id,
@@ -56,8 +56,8 @@ class TeacherRepo implements TeacherRepoInterface{
     public function update($request){
         try{
             $teacher=Teacher::where('id',$request->id)->first();
-            $teacher->Email=$request->Email;
-            $teacher->Password=$request->Password;
+            $teacher->email=$request->Email;
+            $teacher->password=$request->Password;
             $teacher->Name=['ar'=>$request->Name_ar,'en'=>$request->Name_en];
             $teacher->Specialization_id=$request->Specialization_id;
             $teacher->Gender_id=$request->Gender_id;

@@ -44,7 +44,7 @@ class LoginController extends Controller
         return view('auth.login',compact('type'));
     }
 
-//we can use AtuhTrait instead
+//we can use AuthTrait instead
     public function login(Request $request){
         if($request->type == 'student'){
             $guardName= 'student';

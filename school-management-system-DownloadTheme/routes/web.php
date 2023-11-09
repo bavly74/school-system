@@ -44,7 +44,7 @@ Route::group(['namespace' => 'Auth'], function () {
 
     Route::get('/login/{type}',[LoginController::class,'loginForm'])->middleware('guest')->name('login.show');
     
-    Route::post('/login','LoginController@login')->name('login');
+    Route::post('/login',[LoginController::class,'login'])->name('login');
     Route::get('/logout/{type}', 'LoginController@logout')->name('logout');
 });
  
@@ -230,10 +230,8 @@ Route::group(
 
         Route::view('add-parent','livewire.parent-form')->name('add_parent');
 
-    // Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+  
     Route::get('/selection', function(){return view('auth.selection');});
 
     });
 
-
-// Route::get('/home', 'HomeController@index')->name('home');
