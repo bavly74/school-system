@@ -28,6 +28,19 @@
                     class="right-nav-text">الاقسام</span></a>
         </li>
            
+        <li>
+            <a href="javascript:void(0);" data-toggle="collapse" data-target="#sections-menu">
+                <div class="pull-left"><i class="fas fa-chalkboard"></i><span
+                        class="right-nav-text">التقارير</span></div>
+                <div class="pull-right"><i class="ti-plus"></i></div>
+                <div class="clearfix"></div>
+            </a>
+            <ul id="sections-menu" class="collapse" data-parent="#sidebarnav">
+                <li><a href="{{route('attendance.report')}}">تقرير الحضور والغياب</a></li>
+                <li><a href="#">تقرير الامتحانات</a></li>
+            </ul>
+
+        </li>
 
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu9">
@@ -51,7 +64,7 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="calendar-menu10" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{route('quizzes.index') }}">{{ trans('main_trans.Quizzes') }} </a> </li>
+                            <li> <a href="{{route('teacher-quizzes.index') }}">{{ trans('main_trans.Quizzes') }} </a> </li>
                             <li> <a href="{{route('questions.index') }}">{{ trans('main_trans.Questions') }} </a> </li>
 
                         </ul>

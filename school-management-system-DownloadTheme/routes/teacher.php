@@ -24,8 +24,18 @@ Route::group(
 
     Route::group(['namespace'=>'Teacher'],function(){
         Route::get('/students-list', [TeacherController::class,'getStudents'])->name('students-list.index');
-        Route::get('/sections-list', [TeacherController::class,'getSections'])->name('sections-list.index');
-
+        Route::get('/sections-list',  [TeacherController::class,'getTeacherSections'])->name('sections-list.index');
+        Route::post('/attendance',     [TeacherController::class,'attendance'])->name('attendance');
+        Route::get('/attendance-report', [TeacherController::class,'attendanceReport'])->name('attendance.report');
+        Route::post('/attendance-search',  [TeacherController::class,'attendanceSearch'])->name('attendance.search');
+        Route::get('/teacher-quizzes',       [TeacherController::class,'quizzes'])->name('teacher-quizzes.index');
+        Route::get('/teacher-quizzes-create',  [TeacherController::class,'createQuiz'])->name('teacher-quizzes.create');
+        Route::get('/teacher-quizzes-edit/{id}',[TeacherController::class,'editQuiz'])->name('teacher-quizzes.edit');
+        Route::post('/teacher-quizzes-update',[TeacherController::class,'updateQuiz'])->name('teacher-quizzes.update');
+        Route::post('/teacher-quizzes-store',[TeacherController::class,'storeQuiz'])->name('teacher-quizzes.store');
+        Route::get('/teacher-quizzes-delete/{id}',[TeacherController::class,'deleteQuiz'])->name('teacher-quizzes.delete');
+        Route::get('/Get_classrooms/{id}',[TeacherController::class,'getClassrooms']);
+        Route::get('/Get_Sections/{id}',[TeacherController::class,'Get_Sections']);
     });
 
 });
