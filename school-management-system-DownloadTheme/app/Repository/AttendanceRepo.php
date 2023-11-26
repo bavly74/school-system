@@ -25,7 +25,6 @@ class AttendanceRepo implements AttendanceRepoInterface{
 
     public function store($request){
       try{
-        
         foreach($request->attendences as $studentid=>$attendence){
 
             if( $attendence == 'presence' ) {
@@ -39,7 +38,7 @@ class AttendanceRepo implements AttendanceRepoInterface{
                 'grade_id'=> $request->grade_id,
                 'classroom_id'=> $request->classroom_id,
                 'section_id'=> $request->section_id,
-                'teacher_id'=> 1,
+                'teacher_id'=> 2,
                 'attendence_date'=> date('Y-m-d'),
                 'attendence_status'=> $attendence_status
             ]);

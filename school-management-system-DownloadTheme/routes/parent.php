@@ -13,7 +13,7 @@ Route::group(
     ], function(){
         
     //==============================dashboard============================
-    Route::get('/teacher/dashboard', function () {
+    Route::get('/parent/dashboard', function () {
         return view('pages.parent_dashboard');
     });
     });

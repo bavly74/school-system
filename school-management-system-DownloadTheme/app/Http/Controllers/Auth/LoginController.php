@@ -73,7 +73,8 @@ class LoginController extends Controller
                 return redirect()->intended(RouteServiceProvider::HOME);
             }
          }
-    }
+        
+        }
 
     public function logout(Request $request,$type)
     {

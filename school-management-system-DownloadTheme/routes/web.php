@@ -224,8 +224,6 @@ Route::group(
         Route::group(['namespace'=>'Setting'],function(){
             Route::get('/settings', [SettingController::class,'index'])->name('settings.index');
             Route::post('/settings-update', [SettingController::class,'update'])->name('settings.update');
-
-
         });
 
         Route::view('add-parent','livewire.parent-form')->name('add_parent');

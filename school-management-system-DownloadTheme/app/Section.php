@@ -19,4 +19,8 @@ protected $guarded=[];
     public function teachers(){
         return $this->belongsToMany('App\Teacher','teacher_section');
     }
+
+    public function grades(){
+        return $this->belongsTo('App\Grade','grade_id');
+    }
 }

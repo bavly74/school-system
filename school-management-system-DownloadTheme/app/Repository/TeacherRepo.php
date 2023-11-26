@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repository;
+use Illuminate\Support\Facades\Hash;
 
 use App\Gender;
 use App\Specialization;
@@ -30,7 +31,7 @@ class TeacherRepo implements TeacherRepoInterface{
         try{
             Teacher::create([
                 'email'=>$r->Email,
-                'password'=>$r->Password,
+                'password'=>Hash::make($r->Password),
                 'Name'=>['ar'=>$r->Name_ar,'en'=>$r->Name_en],
                 'Specialization_id'=>$r->Specialization_id,
                 'Gender_id'=>$r->Gender_id,
@@ -57,7 +58,7 @@ class TeacherRepo implements TeacherRepoInterface{
         try{
             $teacher=Teacher::where('id',$request->id)->first();
             $teacher->email=$request->Email;
-            $teacher->password=$request->Password;
+            $teacher->password=Hash::make($request->Password);
             $teacher->Name=['ar'=>$request->Name_ar,'en'=>$request->Name_en];
             $teacher->Specialization_id=$request->Specialization_id;
             $teacher->Gender_id=$request->Gender_id;
