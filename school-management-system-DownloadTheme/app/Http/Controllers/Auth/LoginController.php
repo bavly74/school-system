@@ -34,12 +34,12 @@ class LoginController extends Controller
      *
      * @return void
      */
-    
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
-    
+
     public function loginForm($type){
         return view('auth.login',compact('type'));
     }
@@ -72,8 +72,10 @@ class LoginController extends Controller
             else{
                 return redirect()->intended(RouteServiceProvider::HOME);
             }
-         }
-        
+         }else{
+            return redirect()->back()->with('message','خطأ في اسم المستخدم او كلمة المرور');
+        }
+
         }
 
     public function logout(Request $request,$type)
@@ -87,5 +89,5 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-   
+
 }

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Teachers;
+use App\Degree;
 use App\Http\Requests\StoreTeachers;
 use App\Gender;
+use App\OnlineClass;
+use App\Question;
 use App\Teacher;
 use App\Student;
 use App\Section;
@@ -10,12 +13,16 @@ use App\Attendance;
 use App\Quiz;
 use App\Subject;
 use App\Grade;
+use App\Classroom;
 
 use App\Http\Controllers\Controller;
 use App\Repository\TeacherRepoInterface;
 use App\Specialization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use MacsiDigital\Zoom\Facades\Zoom;
+
 class TeacherController extends Controller
 {
     protected $teachers;
@@ -52,8 +59,8 @@ class TeacherController extends Controller
     }
 
 
-    //////
-    
+    ////Teacher Dashboard////
+
     public function getStudents(){
         //$sectionIds=Teacher::where('id',auth()->user()->id)->sections()->pluck('section_id');
         $sectionIds=DB::table('teacher_section')->where('teacher_id',auth()->user()->id)->pluck('section_id');
@@ -64,10 +71,12 @@ class TeacherController extends Controller
     public function getTeacherSections(){
         $ids=DB::table('teacher_section')->where('teacher_id',auth()->user()->id)->pluck('section_id');
         $sections = Section::whereIn('id', $ids)->get();
-       
+
         return view('pages.teachers.sections_list',['sections'=>$sections]);
-        
+
     }
+
+    //Attendance
 
     public function attendance(Request $request){
 
@@ -96,7 +105,7 @@ try{
 
 }catch(\Exception $e){
     return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
-}  
+}
   }
 
   public function attendanceReport(){
@@ -124,8 +133,11 @@ try{
         $result=Attendance::whereBetween('attendence_date',[$request->from,$request->to])->where('student_id',$request->student_id)->get();
         return view('pages.teachers.attendence_report',['studentsList'=>$studentsList,'result'=>$result]);
     }
-    
+
   }
+
+
+  ///Quizzes
 
   public function quizzes(){
 $quizzes=Quiz::where('teacher_id',auth()->user()->id)->get();
@@ -147,7 +159,7 @@ public function storeQuiz(Request $request){
             'classroom_id'=>$request->Classroom_id,
             'section_id'=>$request->section_id,
             'teacher_id'=>auth()->user()->id
-        ]); 
+        ]);
         toastr()->success(trans('messages.success'));
         return redirect()->route('teacher-quizzes.index');
 
@@ -156,27 +168,204 @@ public function storeQuiz(Request $request){
     }
 }
 
-public function editQuiz(){
-
+public function editQuiz($id){
+    $quizz=Quiz::find($id);
+    $subjects=Subject::all();
+    $grades=Grade::all();
+    return view('pages.teachers.quizzes.edit',['quizz'=>$quizz,'subjects'=>$subjects,'grades'=>$grades]);
 }
 
 
 public function updateQuiz(Request $request){
+    try {
+        $quizz = Quiz::findorFail($request->id);
+        $quizz->name = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
+        $quizz->subject_id = $request->subject_id;
+        $quizz->grade_id = $request->Grade_id;
+        $quizz->classroom_id = $request->Classroom_id;
+        $quizz->section_id = $request->section_id;
+        $quizz->teacher_id = auth()->user()->id;
+        $quizz->save();
+        toastr()->success(trans('messages.Update'));
+        return redirect()->route('quizzes.index');
+    } catch (\Exception $e) {
+        return redirect()->back()->with(['error' => $e->getMessage()]);
+    }
 
 }
 
 public function deleteQuiz($id){
+    try {
+        Quiz::destroy($id);
+        toastr()->error(trans('messages.Delete'));
+        return redirect()->back();
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+    }
+}
+
+
+public function getDegrees ($quiz_id){
+        $degrees=Degree::where('quiz_id',$quiz_id)->get();
+        return view('pages.teachers.quizzes.show-degrees',['degrees'=>$degrees]);
+}
+
+    public function repeatQuiz (Request  $request){
+       Degree::where('quiz_id',$request->quiz_id)->where('student_id',$request->student_id)->delete();
+        toastr()->success('تم فتح الاختبار مرة اخرى للطالب');
+        return redirect()->back();
+    }
+
+
+
+
+
+////Questions
+
+public function questions($id){
+    $questions =Question::where('quiz_id',$id)->get();
+     $quizz=Quiz::findorFail($id);
+     return view('pages.teachers.quizzes.questions',['questions' =>$questions ,'quizz'=>$quizz]);
+}
+
+public function createQuestion($id){
+
+        return view('pages.teachers.quizzes.create-question',['quizz_id'=>$id]);
 
 }
-public function getClassrooms($id)
-{
-    return Classroom::where('grade_id',$id)->pluck("name", "id");
-}
 
-//Get Sections
-public function Get_Sections($id){
+    public function storeQuestion(Request $r,$id){
+        $quiz_id=$id;
 
-    return Section::where('classroom_id',$id)->pluck("name", "id");
-}
+        try{
+            $question=new Question();
+            $question->title=$r->title;
+            $question->answers=$r->answers;
+            $question->right_answer=$r->right_answer;
+            $question->score=$r->score;
+            $question->quiz_id=$quiz_id;
+            $question->save();
+            toastr()->success(trans('messages.success'));
+            return redirect()->back();
+
+        }catch(\Exception $e){
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+
+        }
+
+    }
+    public function editQuestion($id)
+    {
+        $question=Question::findorFail($id);
+        return view('pages.teachers.quizzes.edit-question',['question'=>$question]);
+    }
+
+    public function updateQuestion(Request $r,$id){
+
+
+        try{
+            $question= Question::findorFail($id);
+            $question->title=$r->title;
+            $question->answers=$r->answers;
+            $question->right_answer=$r->right_answer;
+            $question->score=$r->score;
+
+            $question->save();
+            toastr()->success(trans('messages.Update'));
+            return redirect()->back();
+
+        }catch(\Exception $e){
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+
+        }
+    }
+
+    public function deleteQuestion($id){
+        try {
+            Question::destroy($id);
+            toastr()->error(trans('messages.Delete'));
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    ///online meetings
+
+    public function getAllMeetings(){
+        $online_classes=OnlineClass::where('created_by',auth()->user()->email)->get();
+        return view('pages.teachers.online_classes.index',['online_classes'=>$online_classes]);
+    }
+    public function createIndirectMeeting(){
+        $Grades=Grade::all();
+        return view('pages.teachers.online_classes.indirect',['Grades'=>$Grades]);
+    }
+
+    public function storeIndirectMeeting(Request $request){
+        try {
+
+
+            OnlineClass::create([
+                'Grade_id' => $request->Grade_id,
+                'integration'=>0,
+                'Classroom_id' => $request->Classroom_id,
+                'section_id' => $request->section_id,
+                'created_by' => auth()->user()->email,
+                'meeting_id' => $request->meeting_id,
+                'topic' => $request->topic,
+                'start_at' => $request->start_time,
+                'duration' => $request->duration,
+                'password' => $request->password,
+                'start_url' => $request->start_url,
+                'join_url' => $request->join_url,
+            ]);
+            toastr()->success(trans('messages.success'));
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function destroyMeeting(Request $request){
+        $info = OnlineClass::find($request->id);
+
+
+        if( $info->integration==1){
+            $meeting = Zoom::meeting()->find($request->meeting_id);
+            $meeting->delete();
+
+            OnlineClass::destroy($request->id);
+        }else{
+            OnlineClass::destroy($request->id);
+        }
+        toastr()->success(trans('messages.Delete'));
+        return redirect()->back();
+    }
+
+
+    //Update Profile
+
+
+
+
+    public function UpdateProfile(Request  $request,$id){
+        $information = Teacher::findorFail($id);
+
+        if (!empty($request->password)) {
+            $information->Name = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
+            $information->password = Hash::make($request->password);
+            $information->save();
+        } else {
+            $information->Name = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
+            $information->save();
+        }
+        toastr()->success(trans('messages.Update'));
+
+        return view('pages.teachers.profile',['information'=>$information]);
+    }
+
+
+
+
 
 }

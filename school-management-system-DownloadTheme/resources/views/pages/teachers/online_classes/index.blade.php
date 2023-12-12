@@ -21,9 +21,9 @@
                     <div class="col-xl-12 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
-                                <a href="{{route('online-class.create')}}" class="btn btn-success btn-sm" role="button"
+                                <a href="#" class="btn btn-success btn-sm" role="button"
                                    aria-pressed="true">اضافة حصة جديدة</a>
-                                   <a class="btn btn-warning" href="{{route('indirect-meeting.create')}}">اضافة حصة اوفلاين جديدة</a>
+                                   <a class="btn btn-warning" href="{{route('teacher-indirect-meeting.create')}}">اضافة حصة اوفلاين جديدة</a>
                                    <br><br>
 
                                 <div class="table-responsive">
@@ -60,7 +60,7 @@
                                                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Delete_receipt{{$online_classe->meeting_id}}" ><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
-                                        @include('pages.online_classes.delete')
+                                        @include('pages.teachers.online_classes.delete')
                                         @endforeach
                                     </table>
                                 </div>

@@ -23,23 +23,11 @@
                     <!-- menu title -->
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Components </li>
                     <!-- menu item Elements-->
-           
 
 
-                   
 
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu9">
-                            <div class="pull-left"><i class="ti-calendar"></i><span
-                                    class="right-nav-text">{{ trans('main_trans.Exams') }}</span></div>
-                            <div class="pull-right"><i class="ti-plus"></i></div>
-                            <div class="clearfix"></div>
-                        </a>
-                        <ul id="calendar-menu9" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{route('exams.index') }}">{{ trans('main_trans.Exams') }} </a> </li>
-                            
-                        </ul>
-                    </li>
+
+
 
 
                     <li>
@@ -50,22 +38,22 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="calendar-menu10" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{route('quizzes.index') }}">{{ trans('main_trans.Quizzes') }} </a> </li>
-                            <li> <a href="{{route('questions.index') }}">{{ trans('main_trans.Questions') }} </a> </li>
+                            <li> <a href="{{route('student-quizzes.index') }}">{{ trans('main_trans.Quizzes') }} </a> </li>
+
 
                         </ul>
                     </li>
 
-                    
+
 
                     <li>
-            <a href="{{route('settings.index')}}"><i class="fas fa-id-card-alt"></i><span
+            <a href="{{route('student-profile.index')}}"><i class="fas fa-id-card-alt"></i><span
                     class="right-nav-text">الملف الشخصي</span></a>
         </li>
 
-                    
 
-                    
+
+
 
                 </li>
 

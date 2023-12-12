@@ -27,7 +27,7 @@
             <a href="{{route('sections-list.index')}}"><i class="fas fa-chalkboard"></i><span
                     class="right-nav-text">الاقسام</span></a>
         </li>
-           
+
         <li>
             <a href="javascript:void(0);" data-toggle="collapse" data-target="#sections-menu">
                 <div class="pull-left"><i class="fas fa-chalkboard"></i><span
@@ -51,7 +51,7 @@
                         </a>
                         <ul id="calendar-menu9" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{route('students-list.index') }}">قائمة الطلاب </a> </li>
-                            
+
                         </ul>
                     </li>
 
@@ -70,18 +70,31 @@
                         </ul>
                     </li>
 
-                    
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu11">
+                            <div class="pull-left"><i class="ti-calendar"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Online_classes') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu11" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('teacher-online-class.index') }}">{{ trans('main_trans.Online_classes') }} </a> </li>
+
+                        </ul>
+                    </li>
+
+
 
                     <li>
-            <a href="{{route('settings.index')}}"><i class="fas fa-id-card-alt"></i><span
+            <a href="{{route('teacher-profile.index')}}"><i class="fas fa-id-card-alt"></i><span
                     class="right-nav-text">الملف الشخصي</span></a>
         </li>
 
-                    
 
-                    
 
-                </li>
+
+
+
 
                 </ul>
             </div>

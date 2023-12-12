@@ -14,7 +14,7 @@ class ZoomMeetingRepo implements ZoomMeetingRepoInterface{
     use ZoomTrait;
 
     public function index(){
-        $online_classes=OnlineClass::all();
+        $online_classes=OnlineClass::where('created_by',auth()->user()->email)->get();
         return view('pages.online_classes.index',['online_classes'=>$online_classes]);
     }
 
@@ -30,7 +30,7 @@ class ZoomMeetingRepo implements ZoomMeetingRepoInterface{
                 'Grade_id' => $request->Grade_id,
                 'Classroom_id' => $request->Classroom_id,
                 'section_id' => $request->section_id,
-                'user_id' => auth()->user()->id,
+                'created_by' => auth()->user()->email,
                 'meeting_id' => $meeting->id,
                 'topic' => $request->topic,
                 'start_at' => $request->start_time,
@@ -54,13 +54,13 @@ class ZoomMeetingRepo implements ZoomMeetingRepoInterface{
    public function storeIndirectMeeting($request){
     try {
 
-       
+
         OnlineClass::create([
             'Grade_id' => $request->Grade_id,
             'integration'=>0,
             'Classroom_id' => $request->Classroom_id,
             'section_id' => $request->section_id,
-            'user_id' => auth()->user()->id,
+            'created_by' => auth()->user()->email,
             'meeting_id' => $request->meeting_id,
             'topic' => $request->topic,
             'start_at' => $request->start_time,
@@ -70,27 +70,27 @@ class ZoomMeetingRepo implements ZoomMeetingRepoInterface{
             'join_url' => $request->join_url,
         ]);
         toastr()->success(trans('messages.success'));
-        return redirect()->view('pages.online_classes.index');
+        return redirect()->back();
     } catch (\Exception $e) {
         return redirect()->back()->with(['error' => $e->getMessage()]);
     }
    }
 
- 
+
     public function destroy($request){
         $info = OnlineClass::find($request->id);
-      
+
 
         if( $info->integration==1){
             $meeting = Zoom::meeting()->find($request->meeting_id);
             $meeting->delete();
-          
+
            OnlineClass::destroy($request->id);
         }else{
             OnlineClass::destroy($request->id);
         }
         toastr()->success(trans('messages.Delete'));
-        return redirect()->view('pages.online_classes.index');
+        return redirect()->back();
     }
 
 

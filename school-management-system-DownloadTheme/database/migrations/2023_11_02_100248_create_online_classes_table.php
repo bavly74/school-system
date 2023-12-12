@@ -19,7 +19,9 @@ class CreateOnlineClassesTable extends Migration
             $table->foreignId('Grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->foreignId('Classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
             $table->foreignId('section_id')->references('id')->on('sections')->onDelete('cascade');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+           // $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('created_by');
+
             $table->string('meeting_id');
             $table->string('topic');
             $table->dateTime('start_at');

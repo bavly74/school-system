@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
+use App\Quiz;
 use App\Repository\StudentRepoInterface;
+use App\Student;
+use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -77,4 +81,46 @@ class StudentController extends Controller
     {
         return $this->students->getSections($id);
     }
+
+    /// Student Dashboard
+
+    //Quiz
+    public function getAllQuizzes(){
+        $quizzes=Quiz::where('grade_id', auth()->user()->Grade_id)
+            ->where('classroom_id', auth()->user()->Classroom_id)
+            ->where('section_id', auth()->user()->section_id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('pages.students.quizzes.index',['quizzes'=>$quizzes]);
+    }
+
+    public function showQuiz($quiz_id){
+        $student_id=auth()->user()->id;
+        return view('pages.students.quizzes.show',['student_id'=>$student_id,'quiz_id'=>$quiz_id]);
+    }
+
+    //profile
+
+
+    public function showProfile(){
+        $information=Student::findorFail(auth()->user()->id);
+        return view('pages.students.student-profile',['information'=>$information]);
+    }
+
+    public function updateProfile(Request $request,$id){
+        $information = Student::findorFail($id);
+
+        if (!empty($request->password)) {
+            $information->Name = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
+            $information->password = Hash::make($request->password);
+            $information->save();
+        } else {
+            $information->Name = ['en' => $request->Name_en, 'ar' => $request->Name_ar];
+            $information->save();
+        }
+        toastr()->success(trans('messages.Update'));
+        return redirect()->back();
+    }
+
 }

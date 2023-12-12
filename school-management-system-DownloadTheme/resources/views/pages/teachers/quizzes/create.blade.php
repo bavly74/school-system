@@ -30,7 +30,7 @@
                     <div class="col-xs-12">
                         <div class="col-md-12">
                             <br>
-                            <form action="{{route('quizzes.store')}}" method="post" autocomplete="off">
+                            <form action="{{route('teacher-quizzes.store')}}" method="post" autocomplete="off">
                                 @csrf
 
                                 <div class="form-row">
@@ -44,8 +44,8 @@
                                         <input type="text" name="Name_en" class="form-control">
                                     </div>
                                 </div>
-                                <br>   
-                               
+                                <br>
+
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
@@ -53,11 +53,12 @@
                                             <select class="custom-select mr-sm-2" name="subject_id">
                                                 <option selected disabled>حدد المادة الدراسية...</option>
                                                 @foreach($subjects as $subject)
-                                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                                    <option value="{{ $subject->id }}">{{ $subject->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="form-row">
@@ -104,7 +105,11 @@
     <!-- row closed -->
 @endsection
 @section('js')
+
     @toastr_js
+
     @toastr_render
 
-@endsection 
+
+@endsection
+
